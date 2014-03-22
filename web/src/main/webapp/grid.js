@@ -1,8 +1,8 @@
 
 var iNettuts = {
-    
+
     jQuery : $,
-    
+
     settings : {
         columns : '.column',
         widgetSelector: '.widget',
@@ -30,27 +30,27 @@ var iNettuts = {
         this.addWidgetControls();
         this.makeSortable();
     },
-    
+
     getWidgetSettings : function (id) {
         var $ = this.jQuery,
             settings = this.settings;
         return (id&&settings.widgetIndividual[id]) ? $.extend({},settings.widgetDefault,settings.widgetIndividual[id]) : settings.widgetDefault;
     },
-    
+
     addWidgetControls : function () {
         var iNettuts = this,
             $ = this.jQuery,
             settings = this.settings;
-            
+
         $(settings.widgetSelector, $(settings.columns)).each(function () {
             var thisWidgetSettings = iNettuts.getWidgetSettings(this.id);
             if (thisWidgetSettings.removable) {
                 $('<a href="#" class="remove">CLOSE</a>').mousedown(function (e) {
-                    e.stopPropagation();    
+                    e.stopPropagation();
                 }).click(function () {
-                    if(confirm('This widget will be removed, ok?')) {
+                    if(confirm('101212-3 This widget will be removed, ok?')) {
                         $(this).parents(settings.widgetSelector).animate({
-                            opacity: 0    
+                            opacity: 0
                         },function () {
                             $(this).wrap('<div/>').parent().slideUp(function () {
                                 $(this).remove();
@@ -60,10 +60,10 @@ var iNettuts = {
                     return false;
                 }).appendTo($(settings.handleSelector, this));
             }
-            
+
             if (thisWidgetSettings.editable) {
                 $('<a href="#" class="edit"></a>').mousedown(function (e) {
-                    e.stopPropagation();    
+                    e.stopPropagation();
                 }).toggle(function () {
                     $(this).css({backgroundPosition: '-66px 0', width: '55px'})
                         .parents(settings.widgetSelector)
@@ -87,10 +87,10 @@ var iNettuts = {
                     .append('</ul>')
                     .insertAfter($(settings.handleSelector,this));
             }
-            
+
             if (thisWidgetSettings.collapsible) {
                 $('<a href="#" class="collapse"></a>').mousedown(function (e) {
-                    e.stopPropagation();    
+                    e.stopPropagation();
                 }).toggle(function () {
                     $(this).css({backgroundPosition: '-38px 0'})
                         .parents(settings.widgetSelector)
@@ -104,13 +104,13 @@ var iNettuts = {
                 }).prependTo($(settings.handleSelector,this));
             }
         });
-        
+
         $('.edit-box').each(function () {
             $('input',this).keyup(function () {
                 $(this).parents(settings.widgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
             });
             $('ul.colors li',this).click(function () {
-                
+
                 var colorStylePattern = /\bcolor-[\w]{1,}\b/,
                     thisWidgetColorClass = $(this).parents(settings.widgetSelector).attr('class').match(colorStylePattern)
                 if (thisWidgetColorClass) {
@@ -119,17 +119,17 @@ var iNettuts = {
                         .addClass($(this).attr('class').match(colorStylePattern)[0]);
                 }
                 return false;
-                
+
             });
         });
-        
+
     },
-    
+
     attachStylesheet : function (href) {
         var $ = this.jQuery;
         return $('<link href="' + href + '" rel="stylesheet" type="text/css" />').appendTo('head');
     },
-    
+
     makeSortable : function () {
         var iNettuts = this,
             $ = this.jQuery,
@@ -146,7 +146,7 @@ var iNettuts = {
                 });
                 return $('> li:not(' + notSortable + ')', settings.columns);
             })();
-        
+
         $sortableItems.find(settings.handleSelector).css({
             cursor: 'move'
         }).mousedown(function (e) {
@@ -181,7 +181,7 @@ var iNettuts = {
             }
         });
     }
-  
+
 };
 
 iNettuts.init();
